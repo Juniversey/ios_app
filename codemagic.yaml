@@ -1,0 +1,50 @@
+# codemagic.yaml
+# ExamCountdown iOS App
+# 使用此文件配置 Codemagic CI/CD 构建
+
+workflows:
+  exam-countdown:
+    name: Exam Countdown
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.examcountdown.app
+      vars:
+        XCODE_WORKSPACE: "ExamCountdown.xcworkspace"
+        XCODE_SCHEME: "ExamCountdown"
+      xcode: "latest"
+      cocoapods: default
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          # 如果有 CocoaPods 依赖则安装
+          if [ -f Podfile ]; then
+            pod install
+          fi
+
+      - name: Set up code signing
+        script: |
+          echo "Setting up code signing configuration..."
+
+      - name: Run tests
+        script: |
+          xcodebuild test \
+            -workspace ExamCountdown.xcworkspace \
+            -scheme ExamCountdown \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -configuration Debug \
+            ONLY_ACTIVE_ARCH=YES
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/archived/**/*.xcarchive
+
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+      slack:
+        room: '#builds'
