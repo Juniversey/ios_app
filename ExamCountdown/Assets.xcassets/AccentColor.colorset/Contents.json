@@ -1,0 +1,23 @@
+{
+  "properties" : {
+    "color-space" : "srgb"
+  },
+  "items" : [
+    {
+      "id" : "accent-color",
+      "appearance" : "automatic",
+      "appearance-values" : [
+        "light"
+      ],
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0.988",
+          "green" : "0.486",
+          "red" : "0.400"
+        }
+      }
+    }
+  ]
+}

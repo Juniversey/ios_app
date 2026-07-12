@@ -1,0 +1,13 @@
+{
+  "properties" : {
+    "color-space" : "srgb"
+  },
+  "items" : [
+    {
+      "id" : "universal-app-icon",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    }
+  ]
+}
